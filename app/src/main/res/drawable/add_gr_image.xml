@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#C4C4C4"/>
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/ic_baseline_camera"
+        android:bottom="@dimen/padding_12"
+        android:left="@dimen/padding_12"
+        android:right="@dimen/padding_12"
+        android:top="@dimen/padding_12"/>
+</layer-list>
