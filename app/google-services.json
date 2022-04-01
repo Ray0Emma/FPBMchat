@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "683566345686",
+    "project_id": "chatessai-e1cec",
+    "storage_bucket": "chatessai-e1cec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683566345686:android:fcf56dd5f39809b8224877",
+        "android_client_info": {
+          "package_name": "com.example.tp7_asyntask"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683566345686-ko7hamj0mq9nbukmqbm8t5id12d84k77.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZeMKzrV7Ujyf81R14JbR90Apk9EKrXW0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683566345686-ko7hamj0mq9nbukmqbm8t5id12d84k77.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
