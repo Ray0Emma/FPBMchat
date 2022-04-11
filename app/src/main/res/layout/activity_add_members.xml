@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateGroup">
+    tools:context=".AddMembers">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,83 +23,67 @@
 
 
         <TextView
+            android:id="@+id/room_name_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="40dp"
             android:gravity="center_horizontal"
-            android:text=""
-            android:textColor="@color/white"
+            android:text="Add Members"
+            android:textColor="#89C7EB"
             android:textSize="16sp" />
 
 
     </LinearLayout>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="70dp">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/group_image"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_centerHorizontal="true"
-                android:adjustViewBounds="true"
-                android:clickable="true"
-                android:elevation="1dp"
-                android:focusable="true"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                app:srcCompat="@drawable/add_gr_image" />
-
-        </RelativeLayout>
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        android:padding="16dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_margin="12dp"
+            android:orientation="horizontal">
 
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/room_name_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:textColorHint="#8B8888"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp">
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/room_name_edittext"
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center_horizontal"
-                    android:textColorHint="#8B8888"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp">
+                    android:background="@drawable/shape"
+                    android:hint="Set member email"
+                    android:importantForAutofill="no"
+                    android:inputType="text" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/shape"
-                        android:hint="Set group name"
-                        android:importantForAutofill="no"
-                        android:inputType="text" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
+        <ListView
+            android:id="@+id/list_of_messages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/fab"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="16dp"
+            android:divider="@android:color/black"
+            android:dividerHeight="16dp" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -124,5 +108,4 @@
             app:srcCompat="@drawable/ic_arrow_right"
             app:tint="#ffffff" />
     </RelativeLayout>
-
 </RelativeLayout>

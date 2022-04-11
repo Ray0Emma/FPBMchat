@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -88,20 +89,19 @@ public class CreateGroup extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (!Objects.requireNonNull(room_name.getEditText()).getText().toString().equals("")) {
-                    Map<String, Object> map = new HashMap<String, Object>();
-                    map.put(room_name.getEditText().getText().toString(), "");
-                    root.updateChildren(map);
-
-                    uploadImage();
-                    room_name.getEditText().setText(null);
+                    Intent intent = new Intent(getApplicationContext(),AddMembers.class);
+                    intent.putExtra("room_name",room_name.getEditText().getText().toString());
+                    intent.putExtra("filePath",filePath);
+                    startActivity(intent);
+//                    room_name.getEditText().setText(null);
                 }
             }
         });
 
     }
+
     // Select Image method
-    private void SelectImage()
-    {
+    private void SelectImage() {
 
         // Defining Implicit Intent to mobile gallery
         Intent intent = new Intent();
@@ -118,8 +118,7 @@ public class CreateGroup extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode,
                                     int resultCode,
-                                    Intent data)
-    {
+                                    Intent data) {
 
         super.onActivityResult(requestCode,
                 resultCode,
@@ -151,11 +150,14 @@ public class CreateGroup extends AppCompatActivity {
             }
             imageView.setImageBitmap(bitmap);
         }
+        if(requestCode==2)
+        {
+            uploadImage();
+        }
     }
 
     // UploadImage method
-    private void uploadImage()
-    {
+    private void uploadImage() {
         if (filePath != null) {
 
             // Code for showing progressDialog while uploading
@@ -179,8 +181,7 @@ public class CreateGroup extends AppCompatActivity {
 
                                 @Override
                                 public void onSuccess(
-                                        UploadTask.TaskSnapshot taskSnapshot)
-                                {
+                                        UploadTask.TaskSnapshot taskSnapshot) {
 
                                     // Image uploaded successfully
                                     // Dismiss dialog
@@ -195,8 +196,7 @@ public class CreateGroup extends AppCompatActivity {
 
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
-                        public void onFailure(@NonNull Exception e)
-                        {
+                        public void onFailure(@NonNull Exception e) {
 
                             // Error, Image not uploaded
                             progressDialog.dismiss();
@@ -214,15 +214,14 @@ public class CreateGroup extends AppCompatActivity {
                                 // percentage on the dialog box
                                 @Override
                                 public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot)
-                                {
+                                        UploadTask.TaskSnapshot taskSnapshot) {
                                     double progress
                                             = (100.0
                                             * taskSnapshot.getBytesTransferred()
                                             / taskSnapshot.getTotalByteCount());
                                     progressDialog.setMessage(
                                             "Uploaded "
-                                                    + (int)progress + "%");
+                                                    + (int) progress + "%");
                                 }
                             });
         }
