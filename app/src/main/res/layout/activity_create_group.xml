@@ -19,7 +19,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_arrow_left"
-            app:tint="#89C7EB" />
+            app:tint="@color/main_b" />
 
 
         <TextView
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center_horizontal"
-                    android:textColorHint="#8B8888"
+                    android:textColorHint="@color/main_gray"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp">
 
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:backgroundTint="#89C7EB"
+            android:backgroundTint="@color/main_b"
             android:clickable="true"
             android:contentDescription="Next Button"
             android:focusable="true"

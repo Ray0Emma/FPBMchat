@@ -19,7 +19,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_arrow_left"
-            app:tint="#89C7EB" />
+            app:tint="@color/main_b" />
 
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_marginEnd="40dp"
             android:gravity="center_horizontal"
             android:text="Add Members"
-            android:textColor="#89C7EB"
+            android:textColor="@color/main_b"
             android:textSize="16sp" />
 
 
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
-                android:textColorHint="#8B8888"
+                android:textColorHint="@color/main_gray"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp">
 
@@ -75,10 +75,6 @@
             android:id="@+id/list_of_messages"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/fab"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="16dp"
             android:divider="@android:color/black"
@@ -98,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:backgroundTint="#89C7EB"
+            android:backgroundTint="@color/main_b"
             android:clickable="true"
             android:contentDescription="Next Button"
             android:focusable="true"
