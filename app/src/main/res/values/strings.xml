@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Conversations</string>
+    <string name="app_name">FPBM Chat</string>
     <string name="text_label_1">Home</string>
     <string name="text_label_2">Groupes</string>
 </resources>

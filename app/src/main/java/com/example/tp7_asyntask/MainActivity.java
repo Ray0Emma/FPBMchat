@@ -60,32 +60,32 @@ public class MainActivity extends AppCompatActivity {
                     .show();
 
             // Load chat room contents
-            displayChatMessages();
+//            displayChatMessages();
         }
 
-        FloatingActionButton fab =
-                (FloatingActionButton)findViewById(R.id.fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText input = (EditText)findViewById(R.id.input);
-
-                // Read the input field and push a new instance
-                // of ChatMessage to the Firebase database
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .push()
-                        .setValue(new ChatMessage(input.getText().toString(),
-                                FirebaseAuth.getInstance()
-                                        .getCurrentUser()
-                                        .getDisplayName())
-                        );
-
-                // Clear the input
-                input.setText("");
-            }
-        });
+//        FloatingActionButton fab =
+//                (FloatingActionButton)findViewById(R.id.fab);
+//
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                EditText input = (EditText)findViewById(R.id.input);
+//
+//                // Read the input field and push a new instance
+//                // of ChatMessage to the Firebase database
+//                FirebaseDatabase.getInstance()
+//                        .getReference()
+//                        .push()
+//                        .setValue(new ChatMessage(input.getText().toString(),
+//                                FirebaseAuth.getInstance()
+//                                        .getCurrentUser()
+//                                        .getDisplayName())
+//                        );
+//
+//                // Clear the input
+//                input.setText("");
+//            }
+//        });
     }
 
     @Override
@@ -132,14 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        adapter.stopListening();
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,

@@ -71,8 +71,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/member_email">
+
+        </TextView>
         <ListView
-            android:id="@+id/list_of_messages"
+            android:id="@+id/list_of_members"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="0dp"
