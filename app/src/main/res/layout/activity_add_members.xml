@@ -51,7 +51,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/room_name_edittext"
+                android:id="@+id/add_members"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -79,6 +79,7 @@
         </TextView>
         <ListView
             android:id="@+id/list_of_members"
+            android:layout_margin="12dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="0dp"

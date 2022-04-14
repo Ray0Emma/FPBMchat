@@ -11,6 +11,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,14 +24,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -38,9 +43,9 @@ import java.util.UUID;
 
 public class AddMembers extends AppCompatActivity {
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference();
-    TextView room;
+    private TextView room;
     private FloatingActionButton add_room;
-    private FirebaseListAdapter<ChatMessage> adapter;
+
 
 
     FirebaseStorage storage;
@@ -66,10 +71,13 @@ public class AddMembers extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-
-                    Map<String, Object> map = new HashMap<String, Object>();
-                    map.put(room_name, "");
-                    root.updateChildren(map);
+//                    add icon, admin, recentMessage,members (int iduser)
+                    HashMap<String, String> groupdetail = new HashMap();
+                    String id = UUID.randomUUID().toString();
+                    groupdetail.put("id",id);
+                    groupdetail.put("name", room_name);
+                    root.child("GroupDetail").child(id).setValue(groupdetail);
+//                    root.updateChildren(map);
 
                     uploadImage();
 
@@ -79,14 +87,14 @@ public class AddMembers extends AppCompatActivity {
 
         displayAddedUsers();
 
-        final TextInputLayout edittext = (TextInputLayout) findViewById(R.id.room_name_edittext);
+        final TextInputLayout edittext = (TextInputLayout) findViewById(R.id.add_members);
         edittext.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 // If the event is a key-down event on the "enter" button
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
-                    Toast.makeText(AddMembers.this, Objects.requireNonNull(edittext.getEditText()).getText().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddMembers.this, "hi", Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 return false;
@@ -175,35 +183,49 @@ public class AddMembers extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adapter.startListening();
     }
 
 
     private void displayAddedUsers() {
-        ListView listOfMessages = (ListView)findViewById(R.id.list_of_members);
-        TextView memberEmail = findViewById(R.id.member_email);
+        ListView mListView = (ListView)findViewById(R.id.list_of_members);
+        TextView txtv = findViewById(R.id.member_email);
+        DatabaseReference usersRef = root.child("Users");
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
+        Log.d("TAG","farah");
 
-            memberEmail.setText("Email: "+email);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
+                    String email = ds.child("email").getValue(String.class);
+                    String name = ds.child("name").getValue(String.class);
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            String uid = user.getUid();
-        }
+                    Log.d("TAG", email);
+
+                    Members memb = new Members(name,email);
+
+                    Members[] members = new Members[]{memb};
+
+//                 txtv.setText(email);
+//                        array.add(email);
+
+                    ArrayAdapter<Members> adapter = new ArrayAdapter<Members>(AddMembers.this, android.R.layout.simple_list_item_1, members);
+                    mListView.setAdapter(adapter);
+
+                }
 
 
 
 
-//        listOfMessages.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        usersRef.addListenerForSingleValueEvent(eventListener);
 
     }
 
