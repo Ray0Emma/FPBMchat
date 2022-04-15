@@ -2,6 +2,7 @@ package com.example.tp7_asyntask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,10 +13,12 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.data.model.User;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,17 +38,27 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.microedition.khronos.egl.EGLDisplay;
+
 public class AddMembers extends AppCompatActivity {
+
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference();
     private TextView room;
+    private ListView list_view;
+    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> members = new ArrayList<>();
     private FloatingActionButton add_room;
-
 
 
     FirebaseStorage storage;
@@ -58,6 +71,11 @@ public class AddMembers extends AppCompatActivity {
         setContentView(R.layout.activity_add_members);
 
         room = (TextView) findViewById(R.id.room_name_header);
+        list_view = findViewById(R.id.list_of_members);
+        arrayAdapter = new ArrayAdapter<String>(AddMembers.this, android.R.layout.simple_list_item_1, members);
+        list_view.setAdapter(arrayAdapter);
+
+        final EditText edittext = findViewById(R.id.add_members);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -74,7 +92,7 @@ public class AddMembers extends AppCompatActivity {
 //                    add icon, admin, recentMessage,members (int iduser)
                     HashMap<String, String> groupdetail = new HashMap();
                     String id = UUID.randomUUID().toString();
-                    groupdetail.put("id",id);
+                    groupdetail.put("id", id);
                     groupdetail.put("name", room_name);
                     root.child("GroupDetail").child(id).setValue(groupdetail);
 //                    root.updateChildren(map);
@@ -85,17 +103,15 @@ public class AddMembers extends AppCompatActivity {
             });
         }
 
-        displayAddedUsers();
 
-        final TextInputLayout edittext = (TextInputLayout) findViewById(R.id.add_members);
         edittext.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 // If the event is a key-down event on the "enter" button
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
-                    Toast.makeText(AddMembers.this, "hi", Toast.LENGTH_SHORT).show();
-                    return true;
+
+                    displayAddedUsers(edittext);
                 }
                 return false;
             }
@@ -116,10 +132,10 @@ public class AddMembers extends AppCompatActivity {
         if (filePath != null) {
 
             // Code for showing progressDialog while uploading
-                            ProgressDialog progressDialog
-                                    = new ProgressDialog(this);
-                            progressDialog.setTitle("Creating...");
-                            progressDialog.show();
+            ProgressDialog progressDialog
+                    = new ProgressDialog(this);
+            progressDialog.setTitle("Creating...");
+            progressDialog.show();
 
             // Defining the child of storageReference
             StorageReference ref
@@ -140,12 +156,12 @@ public class AddMembers extends AppCompatActivity {
 
                                     // Image uploaded successfully
                                     // Dismiss dialog
-                                                    progressDialog.dismiss();
-                                                    Toast
-                                                            .makeText(AddMembers.this,
-                                                                    "Group Created!!",
-                                                                    Toast.LENGTH_SHORT)
-                                                            .show();
+                                    progressDialog.dismiss();
+                                    Toast
+                                            .makeText(AddMembers.this,
+                                                    "Group Created!!",
+                                                    Toast.LENGTH_SHORT)
+                                            .show();
                                 }
                             })
 
@@ -154,29 +170,29 @@ public class AddMembers extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
 
                             // Error, Image not uploaded
-                                            progressDialog.dismiss();
-                                            Toast
-                                                    .makeText(AddMembers.this,
-                                                            "Failed " + e.getMessage(),
-                                                            Toast.LENGTH_SHORT)
-                                                    .show();
+                            progressDialog.dismiss();
+                            Toast
+                                    .makeText(AddMembers.this,
+                                            "Failed " + e.getMessage(),
+                                            Toast.LENGTH_SHORT)
+                                    .show();
                         }
                     }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
 
-                                                // Progress Listener for loading
-                                                // percentage on the dialog box
-                                                @Override
-                                                public void onProgress(
-                                                        UploadTask.TaskSnapshot taskSnapshot) {
-                                                    double progress
-                                                            = (100.0
-                                                            * taskSnapshot.getBytesTransferred()
-                                                            / taskSnapshot.getTotalByteCount());
-                                                    progressDialog.setMessage(
-                                                            "Created "
-                                                                    + (int) progress + "%");
-                                                }
-                                            });
+                // Progress Listener for loading
+                // percentage on the dialog box
+                @Override
+                public void onProgress(
+                        UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress
+                            = (100.0
+                            * taskSnapshot.getBytesTransferred()
+                            / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage(
+                            "Created "
+                                    + (int) progress + "%");
+                }
+            });
         }
     }
 
@@ -186,16 +202,18 @@ public class AddMembers extends AppCompatActivity {
     }
 
 
-    private void displayAddedUsers() {
-        ListView mListView = (ListView)findViewById(R.id.list_of_members);
-        TextView txtv = findViewById(R.id.member_email);
+    private void displayAddedUsers(EditText E) {
+        TextView txtv = findViewById(R.id.test);
         DatabaseReference usersRef = root.child("Users");
 
-        Log.d("TAG","farah");
+        Log.d("TAG", "farah");
 
-        ValueEventListener eventListener = new ValueEventListener() {
+//        ValueEventListener eventListener = new ValueEventListener() {
+
+        usersRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Set<String> set = new HashSet<>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     String email = ds.child("email").getValue(String.class);
@@ -203,32 +221,40 @@ public class AddMembers extends AppCompatActivity {
 
                     Log.d("TAG", email);
 
-                    Members memb = new Members(name,email);
+                    if (E.getText().toString().equals(email)) {
+                        txtv.setText(email);
+                        set.add(name);
+                    }
+
+                    Members memb = new Members(name, email);
+
+//                    users.add(memb.getName());
 
                     Members[] members = new Members[]{memb};
 
 //                 txtv.setText(email);
-//                        array.add(email);
 
-                    ArrayAdapter<Members> adapter = new ArrayAdapter<Members>(AddMembers.this, android.R.layout.simple_list_item_1, members);
-                    mListView.setAdapter(adapter);
+//                    ArrayAdapter<Members> adapter = new ArrayAdapter<Members>(AddMembers.this, android.R.layout.simple_list_item_1, Integer.parseInt(memb.getName()));
+//                    mListView.setAdapter(adapter);
 
                 }
+//                members.clear();
 
-
-
+//                duplication error
+                members.addAll(set);
+                arrayAdapter.notifyDataSetChanged();
+                E.setText("");
 
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        };
-        usersRef.addListenerForSingleValueEvent(eventListener);
+        });
+//        usersRef.addValueEventListener(eventListener);
 
     }
-
 
 
 }

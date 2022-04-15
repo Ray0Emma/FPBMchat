@@ -2,32 +2,32 @@ package com.example.tp7_asyntask;
 
 import java.io.Serializable;
 
-public class Members implements Serializable {
+public class Members {
 
-    private String userName;
-    private String userEmail;
+    private String name;
+    private String email;
 
 
 
-    public Members(String userName, String userEmail)  {
-        this.userName= userName;
-        this.userEmail = userEmail;
+    public Members(String name, String email)  {
+        this.name= name;
+        this.email = email;
 
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 }
