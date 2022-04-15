@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,6 +28,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,6 +67,8 @@ public class AddMembers extends AppCompatActivity {
     private ArrayList<Members> members = new ArrayList<>();
     private FloatingActionButton add_room;
     private String id = UUID.randomUUID().toString();
+    private ChipGroup chip;
+    private Chip chipi;
 
 
     FirebaseStorage storage;
@@ -78,6 +83,8 @@ public class AddMembers extends AppCompatActivity {
 
         room = (TextView) findViewById(R.id.room_name_header);
         list_view = findViewById(R.id.list_of_members);
+        chipi = findViewById(R.id.member);
+        chip = findViewById(R.id.chipGroup);
 //        adapter = new MembersListAdapter(AddMembers.this, R.layout.added_member, members);
 //        list_view.setAdapter(adapter);
 //        arrayAdapter = new ArrayAdapter<String>(AddMembers.this, android.R.layout.simple_list_item_1, members);
@@ -228,11 +235,14 @@ public class AddMembers extends AppCompatActivity {
 
                     String email = ds.child("email").getValue(String.class);
                     String name = ds.child("name").getValue(String.class);
+                    String profile = ds.child("profile").getValue(String.class);
 
                     Log.d("TAG", email);
 
                     if (E.getText().toString().equals(email)) {
-                        Members m = new Members(name);
+//                        Members m = new Members(name);
+                        Members m = new Members(name,profile);
+
                         Log.d("TAG", m.getName());
 
                         members.add(m);
@@ -250,7 +260,25 @@ public class AddMembers extends AppCompatActivity {
                 list_view.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 E.setText("");
-//                chip.setOnCloseIconClickListener(members.remove());
+//                chipi.setOnCloseIconClickListener(new View.OnClickListener(){
+//                    @Override
+//                    public void onClick(View view) {
+//                chip.removeView(view);
+//                        adapter.notifyDataSetChanged();
+////                ListView mlist =
+//                    }
+//                });
+
+//                list_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//                    @Override
+//                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int listItem, long l) {
+//
+////                        adapter.remove(listItem);
+//                        members.remove(listItem);
+//                        adapter.notifyDataSetChanged();
+//                        return false;
+//                    }
+//                });
 
             }
 

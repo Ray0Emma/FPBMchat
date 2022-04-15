@@ -10,4 +10,5 @@
     <color name="main_b">#89C7EB</color>
     <color name="main_dark_b">#6FA3C1</color>
     <color name="main_gray">#8B8888</color>
+    <color name="light_gray">#33575353</color>
 </resources>

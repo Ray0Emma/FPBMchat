@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 
@@ -45,7 +46,7 @@ public class MembersListAdapter extends ArrayAdapter {
 
         Members members = (Members) getItem(position);
         String name = arralist.get(position).toString();
-//        String birthday = getItem(position).getBirthday();
+        String profile = arralist.get(position).toString();
 //        String sex = getItem(position).getSex();
 
         //Create the person object with the information
@@ -85,8 +86,14 @@ public class MembersListAdapter extends ArrayAdapter {
 
 //        holder.name.setText(person.getName());
         holder.name.setText(members.getName());
-
-//        holder.name.setOnCloseIconClickListener(holder.chip_group.removeView(get));
+//        holder.name.setChipIcon(members.getProfile());
+        holder.name.setOnCloseIconClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                holder.chip_group.removeView(view);
+//                ListView mlist =
+            }
+        });
 //        holder.birthday.setText(person.getBirthday());
 //        holder.sex.setText(person.getSex());
 
