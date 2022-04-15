@@ -23,14 +23,15 @@
 
 
         <TextView
+            android:id="@+id/room_name_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="40dp"
             android:gravity="center_horizontal"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:text="Create the group"
+            android:textColor="@color/main_b"
+            android:textSize="18sp" />
 
 
     </LinearLayout>

@@ -23,6 +23,7 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,7 +58,8 @@ public class AddMembers extends AppCompatActivity {
     private TextView room;
     private ListView list_view;
     private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> members = new ArrayList<>();
+    private MembersListAdapter adapter;
+    private ArrayList<Members> members = new ArrayList<>();
     private FloatingActionButton add_room;
 
 
@@ -72,8 +74,10 @@ public class AddMembers extends AppCompatActivity {
 
         room = (TextView) findViewById(R.id.room_name_header);
         list_view = findViewById(R.id.list_of_members);
-        arrayAdapter = new ArrayAdapter<String>(AddMembers.this, android.R.layout.simple_list_item_1, members);
-        list_view.setAdapter(arrayAdapter);
+//        adapter = new MembersListAdapter(AddMembers.this, R.layout.added_member, members);
+//        list_view.setAdapter(adapter);
+//        arrayAdapter = new ArrayAdapter<String>(AddMembers.this, android.R.layout.simple_list_item_1, members);
+//        list_view.setAdapter(arrayAdapter);
 
         final EditText edittext = findViewById(R.id.add_members);
 
@@ -203,17 +207,14 @@ public class AddMembers extends AppCompatActivity {
 
 
     private void displayAddedUsers(EditText E) {
-        TextView txtv = findViewById(R.id.test);
         DatabaseReference usersRef = root.child("Users");
 
         Log.d("TAG", "farah");
 
-//        ValueEventListener eventListener = new ValueEventListener() {
-
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Set<String> set = new HashSet<>();
+                Set<Members> set = new HashSet<>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     String email = ds.child("email").getValue(String.class);
@@ -222,28 +223,25 @@ public class AddMembers extends AppCompatActivity {
                     Log.d("TAG", email);
 
                     if (E.getText().toString().equals(email)) {
-                        txtv.setText(email);
-                        set.add(name);
+                        Members m = new Members(name);
+                        Log.d("TAG", m.getName());
+
+                        members.add(m);
+//                        set.add(m);
                     }
 
-                    Members memb = new Members(name, email);
-
-//                    users.add(memb.getName());
-
-                    Members[] members = new Members[]{memb};
-
-//                 txtv.setText(email);
-
-//                    ArrayAdapter<Members> adapter = new ArrayAdapter<Members>(AddMembers.this, android.R.layout.simple_list_item_1, Integer.parseInt(memb.getName()));
-//                    mListView.setAdapter(adapter);
 
                 }
 //                members.clear();
 
 //                duplication error
-                members.addAll(set);
-                arrayAdapter.notifyDataSetChanged();
+//                members.addAll(set);
+//                arrayAdapter.notifyDataSetChanged();
+                adapter = new MembersListAdapter(AddMembers.this, R.layout.added_member, members);
+                list_view.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 E.setText("");
+//                chip.setOnCloseIconClickListener(members.remove());
 
             }
 
@@ -252,7 +250,6 @@ public class AddMembers extends AppCompatActivity {
 
             }
         });
-//        usersRef.addValueEventListener(eventListener);
 
     }
 

@@ -10,6 +10,7 @@
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/ic_android_color_control_normal_24dp.xml" value="0.133" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/ic_arrow_right.xml" value="0.133" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/ic_baseline_camera.xml" value="0.133" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.142" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.143" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/ic_baseline_notifications_active_24.xml" value="0.143" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.133" />
@@ -21,7 +22,7 @@
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_add_members.xml" value="0.25" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_create_group.xml" value="0.25" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/added_member.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/added_member.xml" value="0.5" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/create_group.xml" value="0.18" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/main_menu.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/message.xml" value="0.20416666666666666" />
