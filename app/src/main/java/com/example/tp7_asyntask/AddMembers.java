@@ -21,8 +21,10 @@ import android.widget.Toast;
 import com.firebase.ui.auth.data.model.User;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -61,10 +63,12 @@ public class AddMembers extends AppCompatActivity {
     private MembersListAdapter adapter;
     private ArrayList<Members> members = new ArrayList<>();
     private FloatingActionButton add_room;
+    private String id = UUID.randomUUID().toString();
 
 
     FirebaseStorage storage;
     StorageReference storageReference;
+    HashMap<String, String> groupdetail = new HashMap();
 
 
     @Override
@@ -94,8 +98,6 @@ public class AddMembers extends AppCompatActivity {
                 public void onClick(View view) {
 
 //                    add icon, admin, recentMessage,members (int iduser)
-                    HashMap<String, String> groupdetail = new HashMap();
-                    String id = UUID.randomUUID().toString();
                     groupdetail.put("id", id);
                     groupdetail.put("name", room_name);
                     root.child("GroupDetail").child(id).setValue(groupdetail);
@@ -145,13 +147,12 @@ public class AddMembers extends AppCompatActivity {
             StorageReference ref
                     = storageReference
                     .child(
-                            "images/"
-                                    + UUID.randomUUID().toString());
+                            "groupIcons/"
+                                    + id +".jpg");
 
             // adding listeners on upload
             // or failure of image
-            ref.putFile(filePath)
-                    .addOnSuccessListener(
+            ref.putFile(filePath).addOnSuccessListener(
                             new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
                                 @Override
@@ -166,6 +167,14 @@ public class AddMembers extends AppCompatActivity {
                                                     "Group Created!!",
                                                     Toast.LENGTH_SHORT)
                                             .show();
+                                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                                    while (!urlTask.isSuccessful());
+                                        Uri downloadUrl = urlTask.getResult();
+//                                    final String downloadUrl = taskSnapshot.getStorage().getDownloadUrl().getResult().toString();
+////                                    while (!downloadUrl.isSuccessful());
+////                                    Uri url = downloadUrl.getResult();
+                                    groupdetail.put("icon", downloadUrl.toString());
+                                    root.child("GroupDetail").child(id).setValue(groupdetail);
                                 }
                             })
 
@@ -187,7 +196,7 @@ public class AddMembers extends AppCompatActivity {
                 // percentage on the dialog box
                 @Override
                 public void onProgress(
-                        UploadTask.TaskSnapshot taskSnapshot) {
+                        @NonNull UploadTask.TaskSnapshot taskSnapshot) {
                     double progress
                             = (100.0
                             * taskSnapshot.getBytesTransferred()
