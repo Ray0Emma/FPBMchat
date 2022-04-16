@@ -46,6 +46,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.AbstractCollection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -69,11 +70,14 @@ public class AddMembers extends AppCompatActivity {
     private String id = UUID.randomUUID().toString();
     private ChipGroup chip;
     private Chip chipi;
+    private FirebaseAuth mAuth;
+    static int i=0;
 
 
     FirebaseStorage storage;
     StorageReference storageReference;
     HashMap<String, String> groupdetail = new HashMap();
+    HashMap<String, String> groupmembers = new HashMap();
 
 
     @Override
@@ -81,6 +85,7 @@ public class AddMembers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_members);
 
+        mAuth = FirebaseAuth.getInstance();
         room = (TextView) findViewById(R.id.room_name_header);
         list_view = findViewById(R.id.list_of_members);
         chipi = findViewById(R.id.member);
@@ -105,12 +110,24 @@ public class AddMembers extends AppCompatActivity {
                 public void onClick(View view) {
 
 //                    add icon, admin, recentMessage,members (int iduser)
-                    groupdetail.put("id", id);
-                    groupdetail.put("name", room_name);
-                    root.child("GroupDetail").child(id).setValue(groupdetail);
+                    String currentUserID = mAuth.getCurrentUser().getUid();
+                    String currentUserName = mAuth.getCurrentUser().getDisplayName();
+                    if (!groupmembers.isEmpty()) {
+
+                        groupdetail.put("id", id);
+                        groupdetail.put("name", room_name);
+                        groupdetail.put("adminId", currentUserID);
+                        groupdetail.put("adminName", currentUserName);
+                        groupdetail.put("createdAt", String.valueOf(new Date().getTime()));
+                        root.child("GroupDetail").child(id).setValue(groupdetail);
+
 //                    root.updateChildren(map);
 
-                    uploadImage();
+                        uploadImage();
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
 
                 }
             });
@@ -182,6 +199,7 @@ public class AddMembers extends AppCompatActivity {
 ////                                    Uri url = downloadUrl.getResult();
                                     groupdetail.put("icon", downloadUrl.toString());
                                     root.child("GroupDetail").child(id).setValue(groupdetail);
+                                    root.child("GroupDetail").child(id).child("members").setValue(groupmembers);
                                 }
                             })
 
@@ -230,25 +248,29 @@ public class AddMembers extends AppCompatActivity {
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Set<Members> set = new HashSet<>();
+                Set<String> set = new HashSet<>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     String email = ds.child("email").getValue(String.class);
                     String name = ds.child("name").getValue(String.class);
                     String profile = ds.child("profile").getValue(String.class);
+                    String usersID = ds.child("id").getValue(String.class);
+
 
                     Log.d("TAG", email);
 
                     if (E.getText().toString().equals(email)) {
-//                        Members m = new Members(name);
+
+                        Members memb = new Members(usersID);
                         Members m = new Members(name,profile);
 
-                        Log.d("TAG", m.getName());
+                        Log.d("TAG", memb.getName());
 
                         members.add(m);
-//                        set.add(m);
+//                        set.add(String.valueOf(i),usersID);
+                        groupmembers.put(String.valueOf(i), usersID);
+                        i++;
                     }
-
 
                 }
 //                members.clear();
@@ -256,6 +278,8 @@ public class AddMembers extends AppCompatActivity {
 //                duplication error
 //                members.addAll(set);
 //                arrayAdapter.notifyDataSetChanged();
+                String currentUserID = mAuth.getCurrentUser().getUid();
+                groupmembers.put(String.valueOf(i), currentUserID);
                 adapter = new MembersListAdapter(AddMembers.this, R.layout.added_member, members);
                 list_view.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
