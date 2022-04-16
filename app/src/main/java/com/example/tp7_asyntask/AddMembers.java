@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +72,7 @@ public class AddMembers extends AppCompatActivity {
     private ChipGroup chip;
     private Chip chipi;
     private FirebaseAuth mAuth;
+    private ImageView prev;
     static int i=0;
 
 
@@ -146,6 +148,17 @@ public class AddMembers extends AppCompatActivity {
                     displayAddedUsers(edittext);
                 }
                 return false;
+            }
+        });
+        prev = findViewById(R.id.btn_left);
+//        prev.bringToFront();
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreateGroup.class);
+                startActivity(intent);
+//                Intent myIntent = new Intent(getApplicationContext(), CreateGroup.class);
+//                startActivityForResult(myIntent, 0);
             }
         });
 

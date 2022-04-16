@@ -6,4 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".IndexActivity">
 
+    <TextView
+        android:id="@+id/no_groups"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No Groups Yet"
+        android:textSize="10pt" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_grp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/main_b"
+            android:clickable="true"
+            android:contentDescription="Add Group Button"
+            android:focusable="true"
+            android:tint="@color/white"
+            app:elevation="0dp"
+            app:maxImageSize="38dp"
+            app:srcCompat="@drawable/ic_add"
+            app:tint="#ffffff" />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,6 +53,7 @@ public class CreateGroup extends AppCompatActivity {
     private static final java.util.UUID UUID = null;
     // view for image view
     private ShapeableImageView imageView;
+    private ImageView prev;
 
     // Uri indicates, where the image will be picked from
     private Uri filePath;
@@ -129,6 +130,18 @@ public class CreateGroup extends AppCompatActivity {
             }
         });
 
+        prev = findViewById(R.id.btn_left);
+//        prev.bringToFront();
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), IndexActivity.class);
+                startActivity(intent);
+//                Intent myIntent = new Intent(getApplicationContext(), IndexActivity.class);
+//                startActivityForResult(myIntent, 0);
+            }
+        });
+
     }
 
     //    log in
@@ -144,9 +157,9 @@ public class CreateGroup extends AppCompatActivity {
                 String currentUserName = mAuth.getCurrentUser().getDisplayName();
                 String currentUserEmail = mAuth.getCurrentUser().getEmail();
 
-                HashMap<String,String> userInfo = new HashMap<>();
+                HashMap<String, String> userInfo = new HashMap<>();
 
-                userInfo.put("id",currentUserID);
+                userInfo.put("id", currentUserID);
                 userInfo.put("name", currentUserName);
                 userInfo.put("email", currentUserEmail);
 
@@ -213,32 +226,32 @@ public class CreateGroup extends AppCompatActivity {
         }
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_sign_out) {
-            AuthUI.getInstance().signOut(this)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(CreateGroup.this,
-                                    "RAK khrejtyyy!",
-                                    Toast.LENGTH_LONG)
-                                    .show();
-
-                            // Close activity
-                            finish();
-                        }
-                    });
-        }
-        return true;
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.menu_sign_out) {
+//            AuthUI.getInstance().signOut(this)
+//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            Toast.makeText(CreateGroup.this,
+//                                    "RAK khrejtyyy!",
+//                                    Toast.LENGTH_LONG)
+//                                    .show();
+//
+//                            // Close activity
+//                            finish();
+//                        }
+//                    });
+//        }
+//        return true;
+//    }
 
     // Select Image method
     private void SelectImage() {

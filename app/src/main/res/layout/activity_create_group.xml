@@ -18,8 +18,11 @@
             android:layout_height="24dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:contentDescription="Go back button"
             android:src="@drawable/ic_arrow_left"
-            app:tint="@color/main_b" />
+            app:tint="@color/main_b"
+            android:focusable="true" />
 
 
         <TextView
@@ -28,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="40dp"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:text="Create the group"
             android:textColor="@color/main_b"
             android:textSize="18sp" />

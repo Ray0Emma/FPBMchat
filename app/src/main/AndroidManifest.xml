@@ -11,7 +11,12 @@
         android:theme="@style/Theme.Tp7_AsynTask">
         <activity
             android:name=".IndexActivity"
-            android:exported="false" />
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".GroupsActivity"
             android:exported="false" />
@@ -30,16 +35,16 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".CreateGroup"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.Tp7_AsynTask.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

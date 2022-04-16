@@ -18,8 +18,11 @@
             android:layout_height="24dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
+            android:clickable="true"
             android:src="@drawable/ic_arrow_left"
-            app:tint="@color/main_b" />
+            app:tint="@color/main_b"
+            android:focusable="true"
+            android:contentDescription="Go back button" />
 
 
         <TextView
