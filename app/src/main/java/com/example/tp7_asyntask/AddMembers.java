@@ -125,7 +125,9 @@ public class AddMembers extends AppCompatActivity {
 
                         uploadImage();
 
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), GroupsActivity.class);
+                        intent.putExtra("room_name", room_name);
+                        intent.putExtra("room_id", id);
                         startActivity(intent);
                     }
 

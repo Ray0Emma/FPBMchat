@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tp7_AsynTask">
         <activity
+            android:name=".IndexActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GroupsActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddMembers"
             android:exported="false" />
         <activity
@@ -24,7 +30,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".CreateGroup"
             android:exported="true"

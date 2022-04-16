@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GroupsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="119dp"
+        android:background="@color/light_gray"
+        tools:ignore="UseCompoundDrawables">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="9dp"
+            >
+
+            <ImageView
+                android:id="@+id/btn_left"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_arrow_left"
+                app:tint="@color/main_b" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/group_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:elevation="1dp"
+                android:focusable="true"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                app:srcCompat="@drawable/add_gr_image" />
+
+            <TextView
+                android:id="@+id/room_name_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:text="Group name"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="119dp"
+        android:layout_marginBottom="70dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <ListView
+            android:id="@+id/list_of_messages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="16dp"
+            android:divider="@android:color/black"
+            android:dividerHeight="16dp" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_toStartOf="@id/fab"
+            android:background="@color/white"
+            android:layout_marginEnd="13dp"
+            android:gravity="center_horizontal"
+            android:textColorHint="@color/main_gray"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_baseline_attach_file_24"
+            app:endIconTint="#837DFF"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp">
+
+            <EditText
+                android:id="@+id/input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape"
+                android:hint="Input" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/main_b"
+            android:clickable="true"
+            android:contentDescription="Send Button"
+            android:focusable="true"
+            android:tint="@color/white"
+            app:elevation="0dp"
+            app:maxImageSize="31dp"
+            app:srcCompat="@drawable/ic_baseline_send_24"
+            app:tint="#ffffff" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
