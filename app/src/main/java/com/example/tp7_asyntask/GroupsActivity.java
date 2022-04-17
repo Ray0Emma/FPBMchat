@@ -3,6 +3,9 @@ package com.example.tp7_asyntask;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -18,12 +21,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.squareup.picasso.Picasso;
 
 public class GroupsActivity extends AppCompatActivity {
 
     private static final String TAG = "Farah";
     private TextView room ;
-    private ImageView prev;
+    private ImageView prev, iconImg;
 
     private FirebaseListAdapter<ChatMessage> adapter;
 
@@ -33,13 +37,27 @@ public class GroupsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_groups);
 
         room= findViewById(R.id.room_name_header);
+        iconImg = findViewById(R.id.group_image);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
 
         if (b != null) {
             String room_name = (String) b.get("room_name");
             String room_id = (String) b.get("room_id");
+            String icon = (String) b.get("icon");
+            byte[] drawable = (byte[]) b.get("drawable");
             room.setText(room_name);
+            if (icon != null){
+                Picasso.get().load(icon).into(iconImg);
+            }
+            if (drawable != null){
+                Bitmap bmp = BitmapFactory.decodeByteArray(drawable, 0, drawable.length);
+                iconImg.setImageBitmap(bmp);
+            }
+
+
+
+
             displayChatMessages();
         }
 
@@ -68,21 +86,21 @@ public class GroupsActivity extends AppCompatActivity {
             }
         });
 
-        prev = findViewById(R.id.btn_left);
-        prev.bringToFront();
-        prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), IndexActivity.class);
-                startActivity(intent);
-            }
-        });
+//        prev = findViewById(R.id.btn_left);
+//        prev.bringToFront();
+//        prev.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), IndexActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapter.startListening();
+//        adapter.startListening();
     }
 
 

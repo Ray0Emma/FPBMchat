@@ -46,14 +46,14 @@
             android:checkable="false"
             android:text="Group name"
             />
-        <TextView
-            android:id="@+id/last_msg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:checkedIconEnabled="false"
-            android:checkable="false"
-            android:text="No message yet"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/last_msg"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:checkedIconEnabled="false"-->
+<!--            android:checkable="false"-->
+<!--            android:text="No message yet"-->
+<!--            />-->
 
 
     </LinearLayout>

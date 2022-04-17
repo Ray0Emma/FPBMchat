@@ -4,12 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -106,6 +115,39 @@ public class IndexActivity extends AppCompatActivity {
                 adapter = new GroupsListAdapter(IndexActivity.this, R.layout.groups, groups);
                 list_view.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
+                list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int listItem, long l) {
+
+//                        list_view.
+                        TextView textView = (TextView) view.findViewById(R.id.grp_name);
+                        ImageView icon = (ImageView) view.findViewById(R.id.group_image);
+
+                        String room_name = textView.getText().toString();
+
+                        int room_img = icon.getId();
+
+                        BitmapDrawable drawable = (BitmapDrawable) icon.getDrawable();
+
+
+
+                        Intent grp = new Intent(IndexActivity.this,GroupsActivity.class);
+                        Log.d("fff", String.valueOf(getResources().getResourceName(room_img)));
+                        grp.putExtra("room_name",room_name);
+
+                        if (drawable != null){
+                            Bitmap bitmap = drawable.getBitmap();
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                            byte[] byteArray = stream.toByteArray();
+                            grp.putExtra("drawable",  byteArray);
+                        }
+
+                        startActivity(grp);
+
+                    }
+                });
 
             }
 
