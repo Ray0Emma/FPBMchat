@@ -88,24 +88,24 @@ public class CreateGroup extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            // Start sign in/sign up activity
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .build(),
-                    SIGN_IN_REQUEST_CODE
-            );
-        } else {
-            // User is already signed in. Therefore, display
-            // a welcome Toast
-            Toast.makeText(this,
-                    "Welcome " + FirebaseAuth.getInstance()
-                            .getCurrentUser()
-                            .getDisplayName(),
-                    Toast.LENGTH_LONG)
-                    .show();
-        }
+//        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+//            // Start sign in/sign up activity
+//            startActivityForResult(
+//                    AuthUI.getInstance()
+//                            .createSignInIntentBuilder()
+//                            .build(),
+//                    SIGN_IN_REQUEST_CODE
+//            );
+//        } else {
+//            // User is already signed in. Therefore, display
+//            // a welcome Toast
+//            Toast.makeText(this,
+//                    "Welcome " + FirebaseAuth.getInstance()
+//                            .getCurrentUser()
+//                            .getDisplayName(),
+//                    Toast.LENGTH_LONG)
+//                    .show();
+//        }
 
         // on pressing btnSelect SelectImage() is called
         imageView.bringToFront();
@@ -146,51 +146,51 @@ public class CreateGroup extends AppCompatActivity {
                                     Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == SIGN_IN_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-
-                String currentUserID = mAuth.getCurrentUser().getUid();
-                String currentUserName = mAuth.getCurrentUser().getDisplayName();
-                String currentUserEmail = mAuth.getCurrentUser().getEmail();
-
-                HashMap<String, String> userInfo = new HashMap<>();
-
-                userInfo.put("id", currentUserID);
-                userInfo.put("name", currentUserName);
-                userInfo.put("email", currentUserEmail);
-
-                rootRef.child("Users").child(currentUserID).setValue(userInfo);
-
-                Toast.makeText(this,
-                        "Successfully signed in. Welcome!",
-                        Toast.LENGTH_LONG)
-                        .show();
-            } else {
-                Toast.makeText(this,
-                        "We couldn't sign you in. Please try again later.",
-                        Toast.LENGTH_LONG)
-                        .show();
-
-
-                // Sign in failed
-
-                if (resultCode == ErrorCodes.NO_NETWORK) {
-                    Toast.makeText(this,
-                            "no internet con",
-                            Toast.LENGTH_LONG)
-                            .show();
-                    return;
-                }
-
-                Toast.makeText(this,
-                        resultCode,
-                        Toast.LENGTH_LONG)
-                        .show();
-                // Close the app
-                finish();
-            }
-
-        }
+//        if (requestCode == SIGN_IN_REQUEST_CODE) {
+//            if (resultCode == RESULT_OK) {
+//
+//                String currentUserID = mAuth.getCurrentUser().getUid();
+//                String currentUserName = mAuth.getCurrentUser().getDisplayName();
+//                String currentUserEmail = mAuth.getCurrentUser().getEmail();
+//
+//                HashMap<String, String> userInfo = new HashMap<>();
+//
+//                userInfo.put("id", currentUserID);
+//                userInfo.put("name", currentUserName);
+//                userInfo.put("email", currentUserEmail);
+//
+//                rootRef.child("Users").child(currentUserID).setValue(userInfo);
+//
+//                Toast.makeText(this,
+//                        "Successfully signed in. Welcome!",
+//                        Toast.LENGTH_LONG)
+//                        .show();
+//            } else {
+//                Toast.makeText(this,
+//                        "We couldn't sign you in. Please try again later.",
+//                        Toast.LENGTH_LONG)
+//                        .show();
+//
+//
+//                // Sign in failed
+//
+//                if (resultCode == ErrorCodes.NO_NETWORK) {
+//                    Toast.makeText(this,
+//                            "no internet con",
+//                            Toast.LENGTH_LONG)
+//                            .show();
+//                    return;
+//                }
+//
+//                Toast.makeText(this,
+//                        resultCode,
+//                        Toast.LENGTH_LONG)
+//                        .show();
+//                // Close the app
+//                finish();
+//            }
+//
+//        }
         // checking request code and result code
         // if request code is PICK_IMAGE_REQUEST and
         // resultCode is RESULT_OK

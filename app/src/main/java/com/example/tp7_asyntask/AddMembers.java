@@ -72,6 +72,7 @@ public class AddMembers extends AppCompatActivity {
     private FloatingActionButton add_room;
     private String id = UUID.randomUUID().toString();
     private FirebaseAuth mAuth;
+    private Uri downloadUrl;
     private ImageView prev;
     static int i = 0;
 
@@ -81,6 +82,7 @@ public class AddMembers extends AppCompatActivity {
     String room_name;
     HashMap<String, String> groupdetail = new HashMap();
     HashMap<String, String> groupmembers = new HashMap();
+    Intent intent;
 
 
     @Override
@@ -97,7 +99,7 @@ public class AddMembers extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-        Intent intent = new Intent(AddMembers.this, GroupsActivity.class);
+        intent = new Intent(AddMembers.this, GroupsActivity.class);
 
 
         final EditText edittext = findViewById(R.id.add_members);
@@ -132,7 +134,7 @@ public class AddMembers extends AppCompatActivity {
                         uploadImage();
 
 
-//                        startActivity(intent);
+
 
                     }
 
@@ -191,6 +193,7 @@ public class AddMembers extends AppCompatActivity {
             ref.putFile(filePath).addOnSuccessListener(
                     new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
+
 //                        Log.d("fffdown","test");
 
                         @Override
@@ -198,6 +201,7 @@ public class AddMembers extends AppCompatActivity {
                                 UploadTask.TaskSnapshot taskSnapshot) {
 
                             // Image uploaded successfully
+
                             // Dismiss dialog
                             progressDialog.dismiss();
                             Toast
@@ -206,19 +210,28 @@ public class AddMembers extends AppCompatActivity {
                                             Toast.LENGTH_SHORT)
                                     .show();
 
-                            Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!urlTask.isSuccessful()) ;
-                            Uri downloadUrl = urlTask.getResult();
+                            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    downloadUrl = uri;
+                                    //Do what you want with the url
+                                    Log.d("fffdown", String.valueOf(downloadUrl));
+                                    groupdetail.put("icon", downloadUrl.toString());
+                                    root.child("GroupDetail").child(id).setValue(groupdetail);
+                                    intent.putExtra("icon", downloadUrl.toString());
+                                    root.child("GroupDetail").child(id).child("members").setValue(groupmembers);
 
-                            Log.d("fffdown", String.valueOf(downloadUrl));
 //
-                            groupdetail.put("icon", downloadUrl.toString());
-                            intent.putExtra("icon", downloadUrl.toString());
+
+                                }
 
 
+
+                            });
+
+//                            startActivity(intent);
                         }
                     })
-
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -247,11 +260,10 @@ public class AddMembers extends AppCompatActivity {
                                     + (int) progress + "%");
 
                     Log.d("fffpro", String.valueOf(progress));
-//                    if( progress > 110){
-//                        intent.putExtra("room_name", room_name);
-//                        intent.putExtra("room_id", id);
-////                        startActivity(intent);
-//                    }
+                    if( progress == 100.0){
+
+
+                    }
                 }
             });
         } else {
@@ -304,15 +316,15 @@ public class AddMembers extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 E.setText("");
 
-//                list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> adapterView, View view, int listItem, long l) {
-//
-////                        adapter.remove(listItem);
-//                        members.remove(adapterView.getItemAtPosition(listItem));
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                });
+                list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int listItem, long l) {
+
+//                        adapter.remove(listItem);
+                        members.remove(adapterView.getItemAtPosition(listItem));
+                        adapter.notifyDataSetChanged();
+                    }
+                });
 
 
             }
