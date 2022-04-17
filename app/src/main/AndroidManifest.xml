@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tp7_asyntask">
+    package="com.example.tp7_asyntask" >
 
     <application
         android:allowBackup="true"
@@ -8,26 +8,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Tp7_AsynTask">
+        android:theme="@style/Theme.Tp7_AsynTask" >
         <activity
             android:name=".IndexActivity"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.DEFAULT" />
-        </intent-filter>
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".GroupsActivity"
             android:exported="false"
-            android:parentActivityName=".IndexActivity"/>
+            android:parentActivityName=".IndexActivity" />
         <activity
             android:name=".AddMembers"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
             android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,7 +41,7 @@
         <activity
             android:name=".CreateGroup"
             android:exported="false"
-            android:theme="@style/Theme.Tp7_AsynTask.NoActionBar">
+            android:theme="@style/Theme.Tp7_AsynTask.NoActionBar" >
         </activity>
     </application>
 
