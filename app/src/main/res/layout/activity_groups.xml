@@ -45,12 +45,12 @@
                 android:id="@+id/room_name_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_alignParentBottom="true"
+                android:gravity="center"
                 android:text="Group name"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -60,17 +60,28 @@
         android:layout_marginTop="119dp"
         android:layout_marginBottom="70dp"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="12dp">
+
+        <ImageView
+            android:layout_width="130dp"
+            android:background="@color/light_gray"
+            android:id="@+id/img_file"
+            android:visibility="gone"
+            android:scaleType="centerCrop"
+            android:layout_height="97dp" />
 
 
         <ListView
             android:id="@+id/list_of_messages"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="0dp"
             android:layout_marginBottom="16dp"
-            android:divider="@android:color/black"
-            android:dividerHeight="16dp" />
+            android:divider="@android:color/transparent"
+            android:dividerHeight="13dp"
+            >
+
+        </ListView>
+
 
 
     </LinearLayout>
@@ -84,6 +95,7 @@
         android:layout_marginBottom="12dp">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/file"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -105,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape"
-                android:hint="Input" />
+                android:hint="message" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

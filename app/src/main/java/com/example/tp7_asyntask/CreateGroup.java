@@ -131,16 +131,12 @@ public class CreateGroup extends AppCompatActivity {
         });
 
         prev = findViewById(R.id.btn_left);
-//        prev.bringToFront();
-//        prev.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), IndexActivity.class);
-//                startActivity(intent);
-////                Intent myIntent = new Intent(getApplicationContext(), IndexActivity.class);
-////                startActivityForResult(myIntent, 0);
-//            }
-//        });
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 

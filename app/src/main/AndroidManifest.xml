@@ -19,7 +19,8 @@
         </activity>
         <activity
             android:name=".GroupsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".IndexActivity"/>
         <activity
             android:name=".AddMembers"
             android:exported="false" />
