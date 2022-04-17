@@ -66,7 +66,7 @@ public class GroupsListAdapter extends ArrayAdapter {
             convertView = inflater.inflate(mResource, parent, false);
             holder= new GroupsListAdapter.ViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.grp_name);
-            holder.last_msg = (TextView) convertView.findViewById(R.id.last_msg);
+//            holder.last_msg = (TextView) convertView.findViewById(R.id.last_msg);
             holder.icon = (ImageView) convertView.findViewById(R.id.group_image);
             holder.txt = (TextView) convertView.findViewById(R.id.no_groups);
 
@@ -87,6 +87,8 @@ public class GroupsListAdapter extends ArrayAdapter {
 
 
         Picasso.get().load(groups.getIcon()).into(holder.icon);
+//        int id = holder.icon.getId();
+//        holder.icon.setTag(R.drawable.id);
         holder.icon.setVisibility(View.VISIBLE);
 
 

@@ -67,6 +67,7 @@ public class CreateGroup extends AppCompatActivity {
 
     private FloatingActionButton add_room;
     private TextInputLayout room_name;
+    private Intent intent;
 
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference();
 
@@ -121,26 +122,25 @@ public class CreateGroup extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (!Objects.requireNonNull(room_name.getEditText()).getText().toString().equals("")) {
-                    Intent intent = new Intent(getApplicationContext(), AddMembers.class);
+                    intent = new Intent(getApplicationContext(), AddMembers.class);
                     intent.putExtra("room_name", room_name.getEditText().getText().toString());
                     intent.putExtra("filePath", filePath);
                     startActivity(intent);
-//                    room_name.getEditText().setText(null);
                 }
             }
         });
 
         prev = findViewById(R.id.btn_left);
 //        prev.bringToFront();
-        prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), IndexActivity.class);
-                startActivity(intent);
-//                Intent myIntent = new Intent(getApplicationContext(), IndexActivity.class);
-//                startActivityForResult(myIntent, 0);
-            }
-        });
+//        prev.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), IndexActivity.class);
+//                startActivity(intent);
+////                Intent myIntent = new Intent(getApplicationContext(), IndexActivity.class);
+////                startActivityForResult(myIntent, 0);
+//            }
+//        });
 
     }
 
@@ -221,9 +221,11 @@ public class CreateGroup extends AppCompatActivity {
             }
             imageView.setImageBitmap(bitmap);
         }
-        if (requestCode == 2) {
-            uploadImage();
-        }
+
+
+//        if (requestCode == 2) {
+//            uploadImage();
+//        }
 
     }
 //
@@ -323,7 +325,7 @@ public class CreateGroup extends AppCompatActivity {
             StorageReference ref
                     = storageReference
                     .child(
-                            "images/"
+                            "groupIcons/"
                                     + UUID.randomUUID().toString());
 
             // adding listeners on upload

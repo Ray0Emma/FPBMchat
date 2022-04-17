@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,7 @@ public class MembersListAdapter extends ArrayAdapter {
     private static class ViewHolder {
         Chip name;
         ChipGroup chip_group;
+        ImageView profile;
     }
 
 
@@ -64,6 +67,7 @@ public class MembersListAdapter extends ArrayAdapter {
             convertView = inflater.inflate(mResource, parent, false);
             holder= new ViewHolder();
             holder.name = (Chip) convertView.findViewById(R.id.member);
+            holder.profile= (ImageView) convertView.findViewById(R.id.user_image);
             holder.chip_group = (ChipGroup) convertView.findViewById(R.id.chipGroup);
 
 //            holder.birthday = (TextView) convertView.findViewById(R.id.textView2);
@@ -85,13 +89,13 @@ public class MembersListAdapter extends ArrayAdapter {
 //        lastPosition = position;
 
 //        holder.name.setText(person.getName());
+        Picasso.get().load(members.getProfile()).into(holder.profile);
         holder.name.setText(members.getName());
-//        holder.name.setChipIcon(members.getProfile());
+
         holder.name.setOnCloseIconClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 holder.chip_group.removeView(view);
-//                ListView mlist =
             }
         });
 //        holder.birthday.setText(person.getBirthday());

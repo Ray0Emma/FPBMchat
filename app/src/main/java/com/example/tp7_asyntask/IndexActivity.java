@@ -88,16 +88,16 @@ public class IndexActivity extends AppCompatActivity {
                     long members = ds.child("members").getChildrenCount();
                     String grpId = ds.child("id").getValue(String.class);
 
-                    Log.d("TAG", icon);
-                    Log.d("TAG", name);
-                    Log.d("TAG", String.valueOf(members));
+//                    Log.d("TAG", icon);
+//                    Log.d("TAG", name);
+//                    Log.d("TAG", String.valueOf(members));
 
                     i=0;
                     while (i < members){
 
                         String userId = ds.child("members").child(String.valueOf(i)).getValue(String.class);
 
-                        Log.d("TAG2", userId);
+//                        Log.d("TAG2", userId);
 
                         String currentUserID = mAuth.getCurrentUser().getUid();
                         if (currentUserID.equals(userId)) {

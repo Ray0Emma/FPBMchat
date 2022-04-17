@@ -146,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG)
                         .show();
 //                displayChatMessages();
-                Intent intent = new Intent(getApplicationContext(), CreateGroup.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), CreateGroup.class);
+//                startActivity(intent);
             } else {
                 Toast.makeText(this,
                         "We couldn't sign you in. Please try again later.",

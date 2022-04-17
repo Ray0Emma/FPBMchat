@@ -1,6 +1,7 @@
 package com.example.tp7_asyntask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,7 +9,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -61,23 +64,21 @@ import javax.microedition.khronos.egl.EGLDisplay;
 
 public class AddMembers extends AppCompatActivity {
 
-    private DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference root;
     private TextView room;
     private ListView list_view;
-    private ArrayAdapter<String> arrayAdapter;
     private MembersListAdapter adapter;
     private ArrayList<Members> members = new ArrayList<>();
     private FloatingActionButton add_room;
     private String id = UUID.randomUUID().toString();
-    private ChipGroup chip;
-    private Chip chipi;
     private FirebaseAuth mAuth;
     private ImageView prev;
-    static int i=0;
+    static int i = 0;
 
 
     FirebaseStorage storage;
     StorageReference storageReference;
+    String room_name;
     HashMap<String, String> groupdetail = new HashMap();
     HashMap<String, String> groupmembers = new HashMap();
 
@@ -86,24 +87,26 @@ public class AddMembers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_members);
+        root = FirebaseDatabase.getInstance().getReference();
 
         mAuth = FirebaseAuth.getInstance();
         room = (TextView) findViewById(R.id.room_name_header);
         list_view = findViewById(R.id.list_of_members);
-        chipi = findViewById(R.id.member);
-        chip = findViewById(R.id.chipGroup);
-//        adapter = new MembersListAdapter(AddMembers.this, R.layout.added_member, members);
-//        list_view.setAdapter(adapter);
-//        arrayAdapter = new ArrayAdapter<String>(AddMembers.this, android.R.layout.simple_list_item_1, members);
-//        list_view.setAdapter(arrayAdapter);
+
+        // get the Firebase  storage reference
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        Intent intent = new Intent(AddMembers.this, GroupsActivity.class);
+
 
         final EditText edittext = findViewById(R.id.add_members);
 
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
 
         if (b != null) {
-            String room_name = (String) b.get("room_name");
+            room_name = (String) b.get("room_name");
             room.setText("Add members to " + room_name);
 
             add_room = (FloatingActionButton) findViewById(R.id.nex);
@@ -122,15 +125,15 @@ public class AddMembers extends AppCompatActivity {
                         groupdetail.put("adminName", currentUserName);
                         groupdetail.put("createdAt", String.valueOf(new Date().getTime()));
                         root.child("GroupDetail").child(id).setValue(groupdetail);
-
-//                    root.updateChildren(map);
+                        root.child("GroupDetail").child(id).child("members").setValue(groupmembers);
+                        intent.putExtra("room_name", room_name);
+                        intent.putExtra("room_id", id);
 
                         uploadImage();
 
-                        Intent intent = new Intent(getApplicationContext(), GroupsActivity.class);
-                        intent.putExtra("room_name", room_name);
-                        intent.putExtra("room_id", id);
-                        startActivity(intent);
+
+//                        startActivity(intent);
+
                     }
 
                 }
@@ -152,24 +155,22 @@ public class AddMembers extends AppCompatActivity {
         });
         prev = findViewById(R.id.btn_left);
 //        prev.bringToFront();
-        prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreateGroup.class);
-                startActivity(intent);
-//                Intent myIntent = new Intent(getApplicationContext(), CreateGroup.class);
-//                startActivityForResult(myIntent, 0);
-            }
-        });
+//        prev.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), CreateGroup.class);
+//                startActivity(intent);
+////                Intent myIntent = new Intent(getApplicationContext(), CreateGroup.class);
+////                startActivityForResult(myIntent, 0);
+//            }
+//        });
 
 
     }
 
+
     private void uploadImage() {
 
-        // get the Firebase  storage reference
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -178,7 +179,7 @@ public class AddMembers extends AppCompatActivity {
 
             // Code for showing progressDialog while uploading
             ProgressDialog progressDialog
-                    = new ProgressDialog(this);
+                    = new ProgressDialog(AddMembers.this);
             progressDialog.setTitle("Creating...");
             progressDialog.show();
 
@@ -187,36 +188,40 @@ public class AddMembers extends AppCompatActivity {
                     = storageReference
                     .child(
                             "groupIcons/"
-                                    + id +".jpg");
+                                    + id + ".jpg");
 
             // adding listeners on upload
             // or failure of image
             ref.putFile(filePath).addOnSuccessListener(
-                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
-                                @Override
-                                public void onSuccess(
-                                        UploadTask.TaskSnapshot taskSnapshot) {
+//                        Log.d("fffdown","test");
 
-                                    // Image uploaded successfully
-                                    // Dismiss dialog
-                                    progressDialog.dismiss();
-                                    Toast
-                                            .makeText(AddMembers.this,
-                                                    "Group Created!!",
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
-                                    Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-                                    while (!urlTask.isSuccessful());
-                                        Uri downloadUrl = urlTask.getResult();
-//                                    final String downloadUrl = taskSnapshot.getStorage().getDownloadUrl().getResult().toString();
-////                                    while (!downloadUrl.isSuccessful());
-////                                    Uri url = downloadUrl.getResult();
-                                    groupdetail.put("icon", downloadUrl.toString());
-                                    root.child("GroupDetail").child(id).setValue(groupdetail);
-                                    root.child("GroupDetail").child(id).child("members").setValue(groupmembers);
-                                }
-                            })
+                        @Override
+                        public void onSuccess(
+                                UploadTask.TaskSnapshot taskSnapshot) {
+
+                            // Image uploaded successfully
+                            // Dismiss dialog
+                            progressDialog.dismiss();
+                            Toast
+                                    .makeText(AddMembers.this,
+                                            "Group Created!!",
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+
+                            Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!urlTask.isSuccessful()) ;
+                            Uri downloadUrl = urlTask.getResult();
+
+                            Log.d("fffdown", String.valueOf(downloadUrl));
+//
+                            groupdetail.put("icon", downloadUrl.toString());
+                            intent.putExtra("icon", downloadUrl.toString());
+
+
+                        }
+                    })
 
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -244,15 +249,24 @@ public class AddMembers extends AppCompatActivity {
                     progressDialog.setMessage(
                             "Created "
                                     + (int) progress + "%");
+
+                    Log.d("fffpro", String.valueOf(progress));
+//                    if( progress > 110){
+//                        intent.putExtra("room_name", room_name);
+//                        intent.putExtra("room_id", id);
+////                        startActivity(intent);
+//                    }
                 }
             });
+        } else {
+            Log.d("TAGfilep", String.valueOf(filePath));
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//    }
 
 
     private void displayAddedUsers(EditText E) {
@@ -277,47 +291,33 @@ public class AddMembers extends AppCompatActivity {
                     if (E.getText().toString().equals(email)) {
 
                         Members memb = new Members(usersID);
-                        Members m = new Members(name,profile);
+                        Members m = new Members(name, profile);
 
-                        Log.d("TAG", memb.getName());
+//                        Log.d("TAG", memb.getName());
 
                         members.add(m);
-//                        set.add(String.valueOf(i),usersID);
                         groupmembers.put(String.valueOf(i), usersID);
                         i++;
                     }
 
                 }
-//                members.clear();
-
-//                duplication error
-//                members.addAll(set);
-//                arrayAdapter.notifyDataSetChanged();
                 String currentUserID = mAuth.getCurrentUser().getUid();
                 groupmembers.put(String.valueOf(i), currentUserID);
                 adapter = new MembersListAdapter(AddMembers.this, R.layout.added_member, members);
                 list_view.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 E.setText("");
-//                chipi.setOnCloseIconClickListener(new View.OnClickListener(){
+
+//                list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //                    @Override
-//                    public void onClick(View view) {
-//                chip.removeView(view);
+//                    public void onItemClick(AdapterView<?> adapterView, View view, int listItem, long l) {
+//
+////                        adapter.remove(listItem);
+//                        members.remove(adapterView.getItemAtPosition(listItem));
 //                        adapter.notifyDataSetChanged();
-////                ListView mlist =
 //                    }
 //                });
 
-//                list_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//                    @Override
-//                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int listItem, long l) {
-//
-////                        adapter.remove(listItem);
-//                        members.remove(listItem);
-//                        adapter.notifyDataSetChanged();
-//                        return false;
-//                    }
-//                });
 
             }
 
