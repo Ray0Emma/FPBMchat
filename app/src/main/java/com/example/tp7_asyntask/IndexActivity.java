@@ -76,6 +76,7 @@ public class IndexActivity extends AppCompatActivity {
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                groups.clear();
                 Set<String> set = new HashSet<>();
                 i=0;
 

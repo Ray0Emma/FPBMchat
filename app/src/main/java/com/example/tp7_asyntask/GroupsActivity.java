@@ -48,6 +48,7 @@ public class GroupsActivity extends AppCompatActivity {
     private ScrollView scV;
     private FirebaseAuth mAuth;
     private String room_name;
+    private ScrollView mscroll;
     private Uri filePath;
 
     private FirebaseListAdapter<ChatMessage> adapter;
@@ -60,6 +61,7 @@ public class GroupsActivity extends AppCompatActivity {
         room= findViewById(R.id.room_name_header);
         iconImg = findViewById(R.id.group_image);
         addfile = findViewById(R.id.file);
+//        mscroll = findViewById(R.id.mscroll);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -192,6 +194,7 @@ public class GroupsActivity extends AppCompatActivity {
 
         listOfMessages.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+//        mscroll.fullScroll(ScrollView.FOCUS_DOWN);
 
     }
 
