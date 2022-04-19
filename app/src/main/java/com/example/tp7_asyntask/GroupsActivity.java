@@ -61,6 +61,7 @@ public class GroupsActivity extends AppCompatActivity {
         room= findViewById(R.id.room_name_header);
         iconImg = findViewById(R.id.group_image);
         addfile = findViewById(R.id.file);
+        mAuth = FirebaseAuth.getInstance();
 //        mscroll = findViewById(R.id.mscroll);
 
         Intent intent = getIntent();
@@ -174,21 +175,31 @@ public class GroupsActivity extends AppCompatActivity {
                 TextView messageText = (TextView)v.findViewById(R.id.message_text);
                 TextView messageUser = (TextView)v.findViewById(R.id.message_user);
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
+                TextView messageTextMe = (TextView)v.findViewById(R.id.message_text_me);
+                TextView messageTimeMe = (TextView)v.findViewById(R.id.message_time_me);
 //                @SuppressLint("ResourceType") TextView my_msg = v.findViewById(R.layout.message);
 
                 // Set their text
                 messageText.setText(model.getMessageText());
+                messageTextMe.setText(model.getMessageText());
                 messageUser.setText(model.getMessageUser());
                 Log.e(TAG, "displayChatMessages3: "+messageUser);
 
                 // Format the date before showing it
                 messageTime.setText(DateFormat.format("HH:mm AA",
                         model.getMessageTime()));
+                messageTimeMe.setText(DateFormat.format("HH:mm AA",
+                        model.getMessageTime()));
 
-//                String currentUserName = mAuth.getCurrentUser().getDisplayName();
-//                if(model.getMessageUser().equals(currentUserName)){
-////
-//                }
+                String currentUserName = mAuth.getCurrentUser().getDisplayName();
+                if(model.getMessageUser().equals(currentUserName)){
+
+                    messageText.setVisibility(View.GONE);
+                    messageUser.setVisibility(View.GONE);
+                    messageTime.setVisibility(View.GONE);
+                    messageTextMe.setVisibility(View.VISIBLE);
+                    messageTimeMe.setVisibility(View.VISIBLE);
+                }
             }
         };
 

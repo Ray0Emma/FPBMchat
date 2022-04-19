@@ -56,11 +56,11 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="119dp"
-        android:layout_marginBottom="70dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:paddingTop="123dp"
+        android:paddingBottom="40dp"
+        android:paddingHorizontal="@dimen/padding_12">
 
         <ImageView
             android:layout_width="130dp"
@@ -87,12 +87,10 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp">
+        android:layout_margin="12dp"
+        >
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/file"
