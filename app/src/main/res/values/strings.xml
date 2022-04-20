@@ -2,4 +2,27 @@
     <string name="app_name">FPBM Chat</string>
     <string name="text_label_1">Home</string>
     <string name="text_label_2">Groupes</string>
+    <string name="title_home">Profile</string>
+    <string name="title_dashboard">Conversations</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="welcome_in_fpbmgroups">Welcome in FPBMGroups</string>
+    <string name="input_email_hunt">Email</string>
+    <string name="input_password_hunt">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="create_new_account">Sign up now</string>
+    <string name="login_to_continue">login to continue</string>
+    <string name="add_image">Add Image</string>
+    <string name="name_hunt">Name</string>
+    <string name="first_name_hunt">First Name</string>
+    <string name="confirm_password_hunt">Confirm Password</string>
+    <string name="sign_up">sign up</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="home">Home</string>
+    <string name="profile">profile</string>
+    <string name="notification">notification</string>
+    <string name="title_activity_navigation_bar">navigation bar</string>
+    <string name="conversation">conversations</string>
+    <string name="master_isi">Master ISI</string>
+    <string name="hi_there">Hi there! we have a course tomorrow at 8am....</string>
 </resources>

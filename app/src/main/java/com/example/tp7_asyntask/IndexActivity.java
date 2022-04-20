@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tp7_asyntask.activities.SignInActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -60,12 +61,9 @@ public class IndexActivity extends AppCompatActivity {
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .build(),
-                    SIGN_IN_REQUEST_CODE
-            );
+
+            Intent intent = new Intent(IndexActivity.this, SignInActivity.class);
+            startActivity(intent);
         } else {
             // User is already signed in. Therefore, display
             // a welcome Toast

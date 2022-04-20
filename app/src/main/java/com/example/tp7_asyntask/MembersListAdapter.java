@@ -1,6 +1,9 @@
 package com.example.tp7_asyntask;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +92,10 @@ public class MembersListAdapter extends ArrayAdapter {
 //        lastPosition = position;
 
 //        holder.name.setText(person.getName());
-        Picasso.get().load(members.getProfile()).into(holder.profile);
+//        Picasso.get().load(members.getProfile()).into(holder.profile);
+
+        holder.profile.setImageBitmap(getCodedImage(members.getProfile()));
+
         holder.name.setText(members.getName());
 
         holder.name.setOnCloseIconClickListener(new View.OnClickListener(){
@@ -103,5 +109,10 @@ public class MembersListAdapter extends ArrayAdapter {
 
 
         return convertView;
+    }
+    public Bitmap getCodedImage(String imageStr)
+    {
+        byte[] bytes = Base64.decode(imageStr, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes,0,bytes.length);
     }
 }

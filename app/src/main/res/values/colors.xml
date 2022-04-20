@@ -11,4 +11,15 @@
     <color name="main_dark_b">#6FA3C1</color>
     <color name="main_gray">#8B8888</color>
     <color name="light_gray">#33575353</color>
+
+    <color name="primary" >#6FA3C1</color>
+    <color name="primary_text" >#212121</color>
+    <color name="secondary_text" >#757575</color>
+    <color name="input_background" >#ECECEC</color>
+    <color name="error" >#DA1414</color>
+
+
+    <color name="notification" >#FFDFDF</color>
+    <color name="home" >#DADEFF</color>
+    <color name="profile" >#E0FFDA</color>
 </resources>
