@@ -118,13 +118,13 @@ public class AddMembers extends AppCompatActivity {
 
 //                    add icon, admin, recentMessage,members (int iduser)
                     String currentUserID = mAuth.getCurrentUser().getUid();
-                    String currentUserName = mAuth.getCurrentUser().getDisplayName();
+//                    String currentUserName = mAuth.getCurrentUser().getDisplayName();
                     if (!groupmembers.isEmpty()) {
 
                         groupdetail.put("id", id);
                         groupdetail.put("name", room_name);
                         groupdetail.put("adminId", currentUserID);
-                        groupdetail.put("adminName", currentUserName);
+//                        groupdetail.put("adminName", currentUserName);
                         groupdetail.put("createdAt", String.valueOf(new Date().getTime()));
                         root.child("GroupDetail").child(id).setValue(groupdetail);
                         root.child("GroupDetail").child(id).child("members").setValue(groupmembers);
@@ -132,9 +132,6 @@ public class AddMembers extends AppCompatActivity {
                         intent.putExtra("room_id", id);
 
                         uploadImage();
-
-
-
 
                     }
 
@@ -218,14 +215,12 @@ public class AddMembers extends AppCompatActivity {
                                     Log.d("fffdown", String.valueOf(downloadUrl));
                                     groupdetail.put("icon", downloadUrl.toString());
                                     root.child("GroupDetail").child(id).setValue(groupdetail);
-                                    intent.putExtra("icon", downloadUrl.toString());
+
                                     root.child("GroupDetail").child(id).child("members").setValue(groupmembers);
 
-//
+                                    startAct();
 
                                 }
-
-
 
                             });
 
@@ -262,13 +257,18 @@ public class AddMembers extends AppCompatActivity {
                     Log.d("fffpro", String.valueOf(progress));
                     if( progress == 100.0){
 
-
                     }
                 }
             });
         } else {
             Log.d("TAGfilep", String.valueOf(filePath));
         }
+    }
+
+    private void startAct() {
+        intent.putExtra("icon", downloadUrl.toString());
+        startActivity(intent);
+
     }
 
 //    @Override

@@ -74,14 +74,7 @@
             android:visibility="invisible"
             />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:textColorHint="@color/main_gray"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp">
+
 
         <EditText
             android:id="@+id/inputName"
@@ -101,7 +94,6 @@
 
 
             />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/erreur_firstname"

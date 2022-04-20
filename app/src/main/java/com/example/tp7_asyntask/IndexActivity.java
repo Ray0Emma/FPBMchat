@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.tp7_asyntask.activities.SignInActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +44,7 @@ public class IndexActivity extends AppCompatActivity {
     private static final int SIGN_IN_REQUEST_CODE = 0;
 
     private FloatingActionButton add_room;
+    private BottomNavigationView navView ;
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference();
     private ListView list_view;
     private GroupsListAdapter adapter;
@@ -58,6 +60,11 @@ public class IndexActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         list_view = findViewById(R.id.list_of_groups);
+//        navView = findViewById(R.id.nav_view);
+//        navView.inflateMenu(R.menu.bottom_nav_menu);
+//
+//        navView.setSelectedItemId(R.id.navigation_dashboard);
+
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
@@ -67,12 +74,12 @@ public class IndexActivity extends AppCompatActivity {
         } else {
             // User is already signed in. Therefore, display
             // a welcome Toast
-            Toast.makeText(this,
-                    "Welcome " + FirebaseAuth.getInstance()
-                            .getCurrentUser()
-                            .getDisplayName(),
-                    Toast.LENGTH_LONG)
-                    .show();
+//            Toast.makeText(this,
+//                    "Welcome " + FirebaseAuth.getInstance()
+//                            .getCurrentUser()
+//                            .getDisplayName(),
+//                    Toast.LENGTH_LONG)
+//                    .show();
 
             displayGroupes();
         }

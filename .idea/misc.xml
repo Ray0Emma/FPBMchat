@@ -10,6 +10,7 @@
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/background_image.xml" value="0.1465" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/background_input.xml" value="0.1465" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/background_splash.xml" value="0.1555" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/error_input_shadow.xml" value="0.1465" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/hadak.xml" value="0.142" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/ic_android_color_control_normal_24dp.xml" value="0.133" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/drawable/ic_arrow_right.xml" value="0.133" />
@@ -28,11 +29,12 @@
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_add_members.xml" value="0.25" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_create_group.xml" value="0.25" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_groups.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_index.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_index.xml" value="0.1" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_reception.xml" value="0.18177083333333333" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_sign_in.xml" value="0.18177083333333333" />
-        <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_sign_up.xml" value="0.3927855711422846" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/added_member.xml" value="0.2" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/create_group.xml" value="0.18" />
         <entry key="..\:/Users/lenovo/AndroidStudioProjects/tp7_AsynTask/app/src/main/res/layout/dashboard_fragment.xml" value="0.18177083333333333" />

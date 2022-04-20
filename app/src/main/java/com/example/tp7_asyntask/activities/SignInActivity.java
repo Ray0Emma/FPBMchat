@@ -81,12 +81,12 @@ public class SignInActivity extends AppCompatActivity {
             Matcher mat = pattern.matcher(username);
             if (mat.matches() && username.length() > 10)
             {
-                binding.inputEmail.setBackgroundResource(R.drawable.background_input);
+                binding.inputEmail.setBackgroundResource(R.drawable.shape);
                 binding.erreurUsername.setVisibility(View.INVISIBLE);
                 String password = binding.inputPassword.getText().toString();
                 if (password.length() > 6)
                 {
-                    binding.inputPassword.setBackgroundResource(R.drawable.background_input);
+                    binding.inputPassword.setBackgroundResource(R.drawable.shape);
                     binding.erreurPassword.setVisibility(View.INVISIBLE);
                     signin(username, password);
                 }
