@@ -12,7 +12,7 @@ FPBMChat application was created in the middle of 2022 as part of the Master's t
 
 # Screen shots
 
-Main Activity            |  Seconde activity          |  Activity   3       |   Activity   4       |   Activity 5
+ Activity      1     |   activity      2    |  Activity   3       |   Activity   4       |   Activity 5
 :-------------------------:|:-------------------------:|:------------------------:|:------------------------:|:------------------------
 ![photo5981105752456149497](https://user-images.githubusercontent.com/70212296/164340938-0b2c6ced-36e8-452f-bc15-bbcab49194db.jpg)|![photo5981105752456149494](https://user-images.githubusercontent.com/70212296/164341063-f74dd0d0-50b2-481a-b684-80d0fcc86688.jpg)|![photo5981105752456149498](https://user-images.githubusercontent.com/70212296/164341090-6e1999ec-1960-4b00-aa93-a4b7caa4783e.jpg)|![photo5981105752456149501](https://user-images.githubusercontent.com/70212296/164341121-020921df-e016-4667-86b3-05dfcef6e602.jpg)|![photo5981105752456149505](https://user-images.githubusercontent.com/70212296/164341154-223605e7-d1b9-4dc3-bc57-48c61db56ee8.jpg)
 
