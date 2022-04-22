@@ -1,5 +1,7 @@
 # FPBMchat 
+It's a short demo of our mobile app. This application was created in the middle of 2022 as part of the Master's training. The idea is to provide a place for FPBM ( faculty polydisciplinary of Beni mellal ) students to communicate. and to resolve some problems e.g finding older students of your same degree to communicate with them.
 
+#Screen shots
 
 Main Activity            |  Seconde activity          |  Activity   3       |   Activity   4       |   Activity 5
 :-------------------------:|:-------------------------:|:------------------------:|:------------------------:|:------------------------
